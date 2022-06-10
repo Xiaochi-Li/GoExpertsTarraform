@@ -77,14 +77,11 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
   restrictions {
     geo_restriction {
-      restriction_type = "whitelist"
-      locations        = ["US", "CA", "GB", "DE", "AU"]
+      restriction_type = "none"
     }
   }
 
-  tags = {
-    Environment = "dev"
-  }
+  tags = var.common_tags
 
   viewer_certificate {
     cloudfront_default_certificate = true

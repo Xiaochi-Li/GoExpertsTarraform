@@ -7,5 +7,5 @@ provider "aws" {
 provider "aws" {
   # us-east-1 instance for ACM
   region = "us-east-1"
-  alias  = "us_east_1"
+  alias  = "acm_provider"
 }

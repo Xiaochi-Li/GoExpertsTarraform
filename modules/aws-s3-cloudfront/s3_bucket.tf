@@ -1,6 +1,7 @@
-
+// S3 bucket for the website.
 resource "aws_s3_bucket" "site" {
   bucket = var.bucket_name
+  tags   = var.common_tags
 }
 
 
@@ -18,6 +19,13 @@ resource "aws_s3_bucket_acl" "site" {
   bucket = aws_s3_bucket.site.id
 
   acl = "public-read"
+}
+resource "aws_s3_bucket_object" "object" {
+  bucket       = aws_s3_bucket.site.bucket
+  key          = "index.html"
+  source       = "${path.module}/website/index.html"
+  content_type = "text/html"
+  etag         = filemd5("${path.module}/website/index.html")
 }
 
 resource "aws_s3_bucket_policy" "site" {

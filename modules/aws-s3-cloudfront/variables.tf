@@ -1,17 +1,30 @@
-variable "aws_region" {
-  description = "AWS region"
+variable "environment" {
   type        = string
-  default     = "ap-southeast-2"
-}
-
-variable "bucket_name" {
-  description = "s3 bucket name"
-  type        = string
-  default     = "xiaochiligoexpert"
+  description = "The environment (uat, prod, test, etc.)  for the website."
 }
 
 variable "domain_name" {
-  description = "Route 53 domain name"
   type        = string
-  default     = "xiaochiligoexpert.link"
+  description = "The domain name for the website."
+}
+
+variable "bucket_name" {
+  type        = string
+  description = "The name of the bucket without the www. prefix. Normally domain_name."
+}
+
+variable "common_tags" {
+  description = "Common tags you want applied to all components."
+  default = {
+  }
+}
+
+variable "aws_region" {
+  description = "The region of your website except for the acm, which MUST be us-east-1"
+  type        = string
+}
+
+variable "zone" {
+  description = "The region"
+  type        = string
 }
