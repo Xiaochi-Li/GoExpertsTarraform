@@ -48,7 +48,10 @@ variable "vpc_azs" {
   type        = list(string)
 }
 
+// notice this should be the Url path for testing
+// eg: for http://go-expert/api/experts/recommendationList
+// the path is "/api/experts/recommendationList"
 variable "health_check_path" {
   description = "Http path for task health check"
-  default     = "/health"
+  default     = ""
 }
