@@ -38,8 +38,7 @@ resource "aws_route_table_association" "public" {
   route_table_id = aws_route_table.public.id
 }
 
-// QUESTION: wha tis Elastic IP, why does Nat gateway needs it.
-resource "aws_eip" "nat" {
+resource "aws_eip" "private" {
   count = length(var.private_subnets)
   vpc   = true
 }
@@ -51,7 +50,6 @@ resource "aws_nat_gateway" "main" {
 }
 
 resource "aws_route_table" "private" {
-  // TODO: try remove count(), see what happens
   count  = length(var.private_subnets)
   vpc_id = aws_vpc.main.id
 }

@@ -1,20 +1,3 @@
-# module "alb_security_group" {
-#   source  = "terraform-aws-modules/security-group/aws"
-#   version = ">3.2.0"
-
-#   name   = "${var.application_name}-alb-sg"
-#   vpc_id = module.vpc.vpc_id
-
-#   # Ingress for HTTP
-#   ingress_cidr_blocks      = ["0.0.0.0/0"]
-#   ingress_ipv6_cidr_blocks = ["::/0"]
-#   ingress_rules            = ["http-80-tcp"]
-
-#   # Allow all egress
-#   egress_cidr_blocks      = ["0.0.0.0/0"]
-#   egress_ipv6_cidr_blocks = ["::/0"]
-#   egress_rules            = ["all-all"]
-# }
 resource "aws_security_group" "alb" {
   name   = "${var.application_name}-sg-alb-${var.environment}"
   vpc_id = aws_vpc.main.id

@@ -53,5 +53,11 @@ variable "vpc_azs" {
 // the path is "/api/experts/recommendationList"
 variable "health_check_path" {
   description = "Http path for task health check"
+  type        = string
   default     = ""
+}
+
+variable "alb_tls_cert_arn" {
+  type = string
+
 }

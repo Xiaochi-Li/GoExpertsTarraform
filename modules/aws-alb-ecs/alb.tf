@@ -1,32 +1,3 @@
-# module "alb" {
-#   source  = "terraform-aws-modules/alb/aws"
-#   version = "~> 6.0"
-
-#   name = "${var.application_name}-alb"
-
-#   load_balancer_type = "application"
-#   vpc_id             = module.vpc.vpc_id
-#   subnets            = module.vpc.public_subnets
-#   security_groups    = [module.alb_security_group.security_group_id]
-#   ip_address_type    = "ipv4"
-
-#   target_groups = [
-#     {
-#       name             = "${var.application_name}-tg"
-#       backend_protocol = "HTTP"
-#       backend_port     = 80
-#     }
-#   ]
-
-#   http_tcp_listeners = [
-#     {
-#       port               = 80
-#       protocol           = "HTTP"
-#       target_group_index = 0
-#     }
-#   ]
-# }
-
 resource "aws_lb" "main" {
   name                       = "${var.application_name}-alb-${var.environment}"
   internal                   = false
@@ -77,7 +48,7 @@ resource "aws_alb_listener" "https" {
   protocol          = "HTTPS"
 
   ssl_policy      = "ELBSecurityPolicy-2016-08"
-  certificate_arn = "arn:aws:acm:ap-southeast-2:569265449628:certificate/e6bf74d9-68fd-49b5-a937-454ea5c70710"
+  certificate_arn = var.alb_tls_cert_arn
 
   default_action {
     target_group_arn = aws_alb_target_group.main.id

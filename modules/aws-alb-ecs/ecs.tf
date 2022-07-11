@@ -2,6 +2,7 @@ resource "aws_ecs_cluster" "ecs" {
   name = "${var.application_name}-ecs-cluster"
 
   setting {
+    // Enable Container Insights for monitorring, troubleshooting, and setting alarms for all your Amazon ECS resources
     name  = "containerInsights"
     value = "enabled"
   }
@@ -27,6 +28,7 @@ resource "aws_ecs_task_definition" "task" {
         hostPort      = var.container_port
       }
     ]
+    // log Configuration is for showing container running output, for monitorring and troubleshooting
     logConfiguration : {
       logDriver : "awslogs",
       options : {
