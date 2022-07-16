@@ -6,6 +6,9 @@ terraform {
     }
   }
 }
+data "aws_ssm_parameter" "db_connection" {
+  name = "	GO_EXPERT_DB_CONNECTION_STRING"
+}
 
 data "aws_availability_zones" "available" {}
 
@@ -24,4 +27,5 @@ module "aws-alb-ecs" {
   container_port     = 6000
   health_check_path  = "/api/experts/recommendationList"
   alb_tls_cert_arn   = "arn:aws:acm:ap-southeast-2:569265449628:certificate/e6bf74d9-68fd-49b5-a937-454ea5c70710"
+  db_connection      = { name = "CONNECTION_STRING", valueFrom = "${data.aws_ssm_parameter.db_connection.arn}" }
 }

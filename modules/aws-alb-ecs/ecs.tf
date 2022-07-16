@@ -37,6 +37,9 @@ resource "aws_ecs_task_definition" "task" {
         awslogs-stream-prefix : "streaming"
       }
     },
+    secrets : [
+      var.db_connection
+    ]
     name = "${var.application_name}-cont"
   }])
 }

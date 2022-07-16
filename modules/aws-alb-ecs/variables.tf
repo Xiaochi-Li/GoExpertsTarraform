@@ -59,5 +59,12 @@ variable "health_check_path" {
 
 variable "alb_tls_cert_arn" {
   type = string
+}
 
+variable "db_connection" {
+  type = object({
+    name      = string
+    valueFrom = string
+  })
+  description = "the env variable name for the db connection string pass to ECS container for the Backend app"
 }
