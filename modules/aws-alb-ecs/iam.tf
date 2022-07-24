@@ -38,6 +38,7 @@ resource "aws_iam_role" "ecs_task_role" {
 EOF
 }
 
+// create a policy so the ECS task can access the DB_CONNECTION_STRING stored in AWS Systems Manager Parameter Store
 resource "aws_iam_policy" "db_string_parameters" {
   name        = "${var.application_name}-db-string-parameter-${var.environment}"
   description = "A test policy"
@@ -53,7 +54,7 @@ resource "aws_iam_policy" "db_string_parameters" {
         "ssm:GetParameters"
       ],
       "Resource": [
-        "arn:aws:ssm:ap-southeast-2:569265449628:parameter/GO_EXPERT_DB_CONNECTION_STRING"
+        "${var.db_connection.valueFrom}"
       ]
     }
   ]
@@ -68,7 +69,7 @@ resource "aws_iam_role_policy_attachment" "ecs-task-execution-role-policy-attach
 
 resource "aws_iam_role_policy_attachment" "parameter-permission-attachment" {
   role       = aws_iam_role.ecs_task_execution_role.name
-  policy_arn = aws_iam_policy.parameters.arn
+  policy_arn = aws_iam_policy.db_string_parameters.arn
 }
 
 resource "aws_iam_role_policy_attachment" "task_s3" {

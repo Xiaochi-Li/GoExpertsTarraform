@@ -18,15 +18,16 @@ terraform {
 }
 
 locals {
-  domain_name = "xiaochiligoexpert.link"
+  zone = "xiaochiligoexpert.link"
 }
 
 module "cloudfront_s3_website_with_domain" {
-  source      = "../../modules/aws-s3-cloudfront"
-  domain_name = "dev.${local.domain_name}"
-  bucket_name = "dev.${local.domain_name}"
+  source = "../../modules/aws-s3-cloudfront"
+  // TODO - replace the var name domain_name to sub_domain_name
+  domain_name = "dev.${local.zone}"
+  bucket_name = "dev.${local.zone}"
   common_tags = { Project = "goexperts-${terraform.workspace}" }
   aws_region  = "ap-southeast-2"
   environment = "dev"
-  zone        = local.domain_name
+  zone        = local.zone
 }

@@ -25,6 +25,6 @@ variable "aws_region" {
 }
 
 variable "zone" {
-  description = "The region"
+  description = "The domian name"
   type        = string
 }

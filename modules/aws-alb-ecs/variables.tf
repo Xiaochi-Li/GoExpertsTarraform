@@ -68,3 +68,13 @@ variable "db_connection" {
   })
   description = "the env variable name for the db connection string pass to ECS container for the Backend app"
 }
+
+variable "zone" {
+  description = "The domian name"
+  type        = string
+}
+
+variable "domain_name" {
+  type        = string
+  description = "The domain name for the website."
+}
