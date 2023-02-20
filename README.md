@@ -4,7 +4,7 @@ If you want to construct all your infrastructure, e.g. frontend, backend, lambda
 1.  **DO NOT** operate on the `main` branch directly. Checkout your own branch instead, e.g. feature/new_terraform.
 2.  Put different files to the 3 directories:
     - `modules`: resusable terraform modules.
-    - `applications`: deployment files
+    - `applications`: deployment files.
     - `cicd`: pipeline files, e.g. Jenkinsfile.
 
 One example: 
